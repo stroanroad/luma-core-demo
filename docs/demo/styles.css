@@ -1,0 +1,124 @@
+/* GLOBAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #05142e 0%, #010408 100%);
+  color: #e6f1ff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.lc-header {
+  text-align: center;
+  padding: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lc-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.lc-sub {
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+/* MAIN */
+.lc-main {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* NAVIGATION */
+.hub-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hub-btn {
+  flex: 1;
+  padding: 0.7rem;
+  border-radius: 100px;
+  border: 1px solid rgba(120, 200, 255, 0.4);
+  background: rgba(0, 20, 45, 0.85);
+  color: #e6f1ff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.hub-btn.active {
+  background: rgba(15, 77, 146, 0.9);
+  border-color: #5ecbff;
+  box-shadow: 0 0 10px #5ecbff55;
+}
+
+/* PANELS */
+.hub-panel, .receipt-panel {
+  background: rgba(0, 10, 25, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.hub-panel h2 {
+  margin-bottom: 0.6rem;
+}
+
+/* ACTION BUTTONS */
+.action-btn {
+  display: block;
+  width: 100%;
+  margin: 0.4rem 0;
+  padding: 0.7rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(10, 60, 120, 0.9);
+  color: #e6f1ff;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.action-btn:hover {
+  background: rgba(20, 90, 150, 0.95);
+}
+
+/* RECEIPTS */
+.receipt-list {
+  list-style: none;
+  max-height: 220px;
+  overflow-y: auto;
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.receipt-item {
+  padding: 0.6rem;
+  border-radius: 8px;
+  background: rgba(15, 40, 70, 0.9);
+  border-left: 4px solid #52c7ff;
+  font-size: 0.82rem;
+}
+
+/* FOOTER */
+.lc-footer {
+  text-align: center;
+  padding: 0.8rem;
+  opacity: 0.4;
+}
