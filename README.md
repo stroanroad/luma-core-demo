@@ -1,4 +1,8 @@
 # 🚀 Luma Core — Sovereign Digital Infrastructure (Demo Repo)
+![Status](https://img.shields.io/badge/status-demo-blue)
+![License](https://img.shields.io/badge/license-proprietary-red)
+![PWA](https://img.shields.io/badge/PWA-offline--first-success)
+![Docs](https://img.shields.io/badge/documentation-complete-brightgreen)
 
 **Luma Core** is a sovereign, offline-first digital infrastructure framework designed to unify:
 
