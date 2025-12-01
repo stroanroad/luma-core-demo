@@ -1,60 +1,96 @@
-# 🏛 Government Hub — Documentation Shell
+# Luma Core — Government Hub
 
-The Government Hub demonstrates how Luma Core supports sovereign digital services
-such as identity, cases, public services, utilities, justice, and regulatory workflows.
+The **Government Hub** provides sovereign-grade digital workflows, audit receipts,
+and policy enforcement for public administration, justice, social services, and
+national operations.
 
-This file is a documentation shell for future expansion.
-
----
-
-## 📌 Purpose
-The Government Hub provides a unified framework for:
-
-- citizen identity workflows  
-- service portals (licensing, benefits, records)  
-- case management (PSNI, justice, courts)  
-- utilities and metering events  
-- global governance data  
-- cross-border receipt exchange  
-- sovereign audit evidence  
+It demonstrates how Luma Core can unify fragmented systems into a single,
+offline-capable, verifiable audit layer that strengthens trust, compliance,
+and accountability across government institutions.
 
 ---
 
-## 🔄 Example Workflows
+## 🏛 Core Government Use Cases
 
-### 1. Case Creation (Justice/PSNI)
-`case.open → audit receipt → policy validation`
+- Identity & citizen services  
+- Case management (health, justice, welfare, utilities)  
+- Licensing & permits  
+- Evidence chains / case audit trails  
+- Enforcement workflows (optional multi-signature)  
+- Rescue operations & emergency coordination  
+- Infrastructure & utility events  
+- Cross-department data integrity  
 
-### 2. Service Request
-`service.apply → document check → audit receipt`
-
-### 3. Utilities Event
-`meter.event → policy → audit receipt → optional ledger anchor`
+All workflows generate **tamper-evident, hash-linked receipts**.
 
 ---
 
-## 🔐 Receipt Logic
+## 🔧 Key Workflows
 
-Every workflow is backed by sovereign audit receipts:
+### **1. Case Creation**
 
-- device signature  
-- jurisdiction signature (optional)  
-- policy rule outcomes  
-- previous-hash link  
-- timestamp  
-- XIP-compatible envelope  
+### **2. Case Update / Evidence Event**
 
-This ensures **tamper-evident, cross-agency auditability**.
+### **3. Case Closure**
+
+### **4. Inter-department Transfer**
+
+---
+
+## 🛡 Policy Enforcement
+
+Government workflows apply jurisdiction-defined rules:
+
+- age, residency, identity  
+- officer/agent role permissions  
+- evidence handling  
+- social/health case policies  
+- utilities/inspection rules  
+- cross-department access  
+- optional multi-signature events  
+
+Every policy result is embedded in the receipt.
+
+---
+
+## 🧾 Sample Receipt Chain (Simplified)
+
+
+This produces a **complete, verifiable case history**.
+
+---
+
+## 🛰 Offline & Resilient Operation
+
+The Government Hub fully supports:
+
+- offline mode (local queue)  
+- mesh sync between field devices  
+- satellite fallback (DTN)  
+- cross-border reconciliation  
+
+This ensures continuity in:
+
+- rural regions  
+- crisis zones  
+- infrastructure outages  
+- remote field operations  
 
 ---
 
 ## 🧩 Future Expansion
 
-Planned areas include:
+- National identity vault  
+- Council/local gov modules  
+- Digital policing  
+- Evidence chain visualisation  
+- Rescue Ops integration  
+- Utility & infrastructure anchors  
+- Global Gov federation  
 
-- national identity integration  
-- council-level dashboards  
-- PSNI digital case flows  
-- courts & record-keeping  
-- social services hub links  
-- emergency response coordination  
+---
+
+## 📄 Notes
+
+This folder contains documentation only.  
+The full Government Hub engine remains private as part of Luma Core.
