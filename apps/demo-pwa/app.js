@@ -1,83 +1,106 @@
-// HUB DEFINITIONS
+/* ----------------------------------------------------------
+   LUMA CORE DEMO — APP LOGIC
+   Simulated Hubs + Receipt Engine (Demo Only)
+-----------------------------------------------------------*/
+
+/* DOM ELEMENTS */
+const hubButtons = document.querySelectorAll(".hub-btn");
+const hubContent = document.getElementById("hub-content");
+const receiptList = document.getElementById("receipt-list");
+
+/* ACTIVE HUB STATE */
+let activeHub = "finance";
+
+/* SIMPLE RECEIPT COUNTER (DEMO ONLY) */
+let receiptCounter = 1;
+
+/* ----------------------------------------------------------
+   HUB DEFINITIONS (DEMO ONLY)
+-----------------------------------------------------------*/
+
 const hubs = {
   finance: {
     title: "Finance Hub",
     actions: [
-      ["invoice", "Create Sample Invoice"],
-      ["payment", "Record Payment Event"]
+      { id: "invoice", label: "Create Invoice" },
+      { id: "payment", label: "Record Payment" },
+      { id: "vat", label: "Run VAT Check" }
     ]
   },
+
   cannabis: {
-    title: "Cannabis Hub",
+    title: "Cannabis / Health Hub",
     actions: [
-      ["prescription", "Create Prescription"],
-      ["dispense", "Dispense Medication"]
+      { id: "prescription", label: "Issue Prescription" },
+      { id: "dispense", label: "Dispense Product" },
+      { id: "verify", label: "Verify Patient" }
     ]
   },
+
   government: {
     title: "Government Hub",
     actions: [
-      ["open-case", "Open Case"],
-      ["close-case", "Close Case"]
+      { id: "case_open", label: "Open Case" },
+      { id: "case_update", label: "Update Case" },
+      { id: "case_close", label: "Close Case" }
     ]
   }
 };
 
-// DOM
-const hubContent = document.getElementById("hub-content");
-const receiptList = document.getElementById("receipt-list");
-const navBtns = document.querySelectorAll(".hub-btn");
+/* ----------------------------------------------------------
+   SWITCH HUB VIEW
+-----------------------------------------------------------*/
 
-// RENDER HUB
-function renderHub(key) {
-  const hub = hubs[key];
+function renderHub(hubKey) {
+  const hub = hubs[hubKey];
 
   hubContent.innerHTML = `
-      <h2>${hub.title}</h2>
-      <p style="opacity:.8;margin-bottom:.6rem;">Simulated Workflow Actions</p>
-      ${hub.actions
-        .map(
-          (a) =>
-            `<button class="action-btn" data-action="${a[0]}" data-hub="${key}">
-              ${a[1]}
-            </button>`
-        )
-        .join("")}
+    <h2>${hub.title}</h2>
+    ${hub.actions
+      .map(
+        (action) => `
+        <button class="action-btn" onclick="createReceipt('${hubKey}', '${action.id}')">
+          ${action.label}
+        </button>`
+      )
+      .join("")}
   `;
-
-  document.querySelectorAll(".action-btn").forEach((btn) => {
-    btn.onclick = () => {
-      const action = btn.dataset.action;
-      createReceipt(key, action);
-    };
-  });
 }
 
-// RECEIPT GENERATOR
+/* ----------------------------------------------------------
+   CREATE RECEIPT (SIMULATED)
+-----------------------------------------------------------*/
+
 function createReceipt(hub, action) {
-  const now = new Date().toISOString();
-  const id = Math.random().toString(36).slice(2, 10);
+  const timestamp = new Date().toLocaleString();
+
+  const receiptText = `#${receiptCounter++} • ${hub.toUpperCase()} • ${action} • ${timestamp}`;
 
   const li = document.createElement("li");
   li.classList.add("receipt-item");
-  li.textContent = `[${now}] • hub=${hub} • action=${action} • id=${id}`;
+  li.textContent = receiptText;
 
-  receiptList.prepend(li);
+  receiptList.prepend(li); // newest at top
 }
 
-// NAVIGATION HANDLER
-navBtns.forEach((btn) => {
-  btn.onclick = () => {
-    navBtns.forEach((b) => b.classList.remove("active"));
+/* ----------------------------------------------------------
+   EVENT LISTENERS — HUB TABS
+-----------------------------------------------------------*/
+
+hubButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    // update active state
+    hubButtons.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
-    renderHub(btn.dataset.hub);
-  };
+
+    activeHub = btn.dataset.hub;
+    renderHub(activeHub);
+  });
 });
 
-// Default Hub
-renderHub("finance");
+/* ----------------------------------------------------------
+   INIT — LOAD DEFAULT HUB
+-----------------------------------------------------------*/
 
-// PWA SERVICE WORKER
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
+renderHub(activeHub);
+
