@@ -14,11 +14,12 @@
 - XRPL / DLT settlement  
 - Zero-trust audit trails  
 
-This demo repository combines:
+This demo repository includes:
 
-- A working **Progressive Web App (PWA)** showcasing hub workflows  
-- High-level documentation and protocol specifications  
-*(Production cryptography and engine internals are private)*
+- A working **Progressive Web App (PWA)** demonstrating hub workflows  
+- High-level documentation and architecture specifications  
+
+> **Note:** Production cryptography, engines, adaptive decision logic, and protocol internals remain private.
 
 ---
 
@@ -26,47 +27,37 @@ This demo repository combines:
 
 ### ✔️ Demo App (PWA)
 - Finance / Cannabis / Government mini-hubs  
-- Simulated audit receipts  
-- Offline-capable PWA  
-- Receipt-per-workflow model  
+- Live simulated audit receipts  
+- Offline-capable installable PWA  
+- Demonstrates the “receipt-per-workflow” Luma model  
 
 ### ✔️ Documentation & Protocol Spec
 - XIP Protocol (Cross-Integrity Protocol)  
-- Audit Receipt Engine spec  
-- Adaptive Communications Layer (ACL) spec  
-- Architecture overview & design doc  
+- Audit Receipt Engine specification  
+- Adaptive Communications Layer (ACL)  
+- Architecture & system overview  
 
 ### ✔️ Sovereign, Offline-First Architecture
-- Mesh network fallback  
+- Mesh fallback  
 - Satellite / DTN fallback  
-- Full audit integrity even without internet  
+- Delay-tolerant syncing  
+- Full audit integrity with zero connectivity  
 
 ---
 
 ## 📁 Repository Structure
-```
-luma-core-demo/
-├── apps/
-│   └── demo-pwa/       # Working PWA demo
-├── docs/               # Documentation & technical specs
-│   ├── overview.md
-│   ├── architecture.md
-│   ├── audit-receipts.md
-│   ├── xip-standard.md
-│   ├── xip-detailed-spec.md
-│   ├── audit-engine.md
-│   └── adaptive-comms-deep.md
-└── src/
-    ├── engine/         # Placeholder for private core engine
-    └── hubs/           # Hub documentation shells
-```
 
 
 ---
 
 ## ✅ Next Steps (For Reviewers & Evaluators)
 
-- Browse the demo under `apps/demo-pwa/`  
-- Review protocol and architecture docs in `docs/`  
-- Use this repo as proof of concept for funding, partnership, or pilot deployment  
+- Explore the running demo under `apps/demo-pwa/`  
+- Review protocol and architectural documents in `docs/`  
+- Use this repository as a **proof-of-concept** for sovereign deployment, investment review, or academic evaluation  
 
+---
+
+## ✔ Status
+
+This repository is complete and kept fully updated as Luma Core evolves.
