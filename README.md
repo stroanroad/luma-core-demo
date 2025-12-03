@@ -1,63 +1,55 @@
-# 🚀 Luma Core — Sovereign Digital Infrastructure (Demo Repo)
-![Status](https://img.shields.io/badge/status-demo-blue)
-![License](https://img.shields.io/badge/license-proprietary-red)
-![PWA](https://img.shields.io/badge/PWA-offline--first-success)
-![Docs](https://img.shields.io/badge/documentation-complete-brightgreen)
+# Luma Core Demo — Ultraslim Reference Implementation
 
-**Luma Core** is a sovereign, offline-first digital infrastructure framework designed to unify:
-
-- Government systems  
-- Finance & ISO 20022 workflows  
-- Healthcare & Cannabis compliance  
-- Utilities & Metering  
-- Justice, Rescue Ops & Emergency Networks  
-- XRPL / DLT settlement  
-- Zero-trust audit trails  
-
-This demo repository includes:
-
-- A working **Progressive Web App (PWA)** demonstrating hub workflows  
-- High-level documentation and architecture specifications  
-
-> **Note:** Production cryptography, engines, adaptive decision logic, and protocol internals remain private.
+This repository provides the lightweight demo implementation used for validating XIP Protocol concepts:
+offline receipts, hub navigation, sync behaviour, and minimal PWA architecture.
 
 ---
 
-## 🧭 What This Repository Demonstrates
+## Live Demo
 
-### ✔️ Demo App (PWA)
-- Finance / Cannabis / Government mini-hubs  
-- Live simulated audit receipts  
-- Offline-capable installable PWA  
-- Demonstrates the “receipt-per-workflow” Luma model  
-
-### ✔️ Documentation & Protocol Spec
-- XIP Protocol (Cross-Integrity Protocol)  
-- Audit Receipt Engine specification  
-- Adaptive Communications Layer (ACL)  
-- Architecture & system overview  
-
-### ✔️ Sovereign, Offline-First Architecture
-- Mesh fallback  
-- Satellite / DTN fallback  
-- Delay-tolerant syncing  
-- Full audit integrity with zero connectivity  
+🔗 https://fluffy-pony-66247c.netlify.app
 
 ---
 
-## 📁 Repository Structure
+## What This Demo Shows
 
+- Offline-first behaviour  
+- Hash-chained audit receipts  
+- Minimal hub structure  
+- PWA installation  
+- Local-only event storage  
+- Seamless offline → online sync  
+- Test flows for Finance, Cannabis, and Government modules  
+
+This demo is intentionally ultraslim — it exists to support early protocol testing, not full UI design.
 
 ---
 
-## ✅ Next Steps (For Reviewers & Evaluators)
+## Folder Structure
 
-- Explore the running demo under `apps/demo-pwa/`  
-- Review protocol and architectural documents in `docs/`  
-- Use this repository as a **proof-of-concept** for sovereign deployment, investment review, or academic evaluation  
+```
+/apps/demo-pwa        – The actual demo app
+/src                  – Shared logic
+/docs                 – Architecture + protocol docs
+```
 
 ---
 
-## ✔ Status
+## Protocol Link
 
-This repository is complete and kept fully updated as Luma Core evolves.
+The demo is powered by the XIP Protocol specification:
+
+https://github.com/stroanroad/luma-xip-protocol
+
+---
+
+## Licence
+
+This demonstration is part of the Luma Core ecosystem.  
+All sovereign, governmental, or enterprise deployments require a signed release key.
+
+---
+
+## Contact
+
+https://luma-connect.app
