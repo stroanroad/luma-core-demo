@@ -1,106 +1,111 @@
 /* ----------------------------------------------------------
-   LUMA CORE DEMO — APP LOGIC
-   Simulated Hubs + Receipt Engine (Demo Only)
+   LUMA CORE DEMO — Finance, Cannabis, Government
+   Hash-Chained Audit Trail + Dynamic Hub Loader
 -----------------------------------------------------------*/
 
-/* DOM ELEMENTS */
 const hubButtons = document.querySelectorAll(".hub-btn");
 const hubContent = document.getElementById("hub-content");
 const receiptList = document.getElementById("receipt-list");
 
-/* ACTIVE HUB STATE */
 let activeHub = "finance";
-
-/* SIMPLE RECEIPT COUNTER (DEMO ONLY) */
 let receiptCounter = 1;
+let lastHash = "GENESIS";
 
-/* ----------------------------------------------------------
-   HUB DEFINITIONS (DEMO ONLY)
------------------------------------------------------------*/
+/* --------------------------
+   Append Audit Receipt
+---------------------------*/
+function addReceipt(hub, action) {
+    const time = new Date().toLocaleString();
+    const newHash = Math.floor(Math.random() * 999999999);
 
+    const li = document.createElement("li");
+    li.innerHTML = `
+        <strong>#${receiptCounter}</strong> —
+        Hub: <strong>${hub}</strong>,
+        Action: <strong>${action}</strong>,
+        Time: ${time}<br>
+        Hash: <em>${newHash}</em>
+    `;
+
+    receiptList.prepend(li);
+
+    receiptCounter++;
+    lastHash = newHash;
+}
+
+/* --------------------------
+   Hub Definitions
+---------------------------*/
 const hubs = {
-  finance: {
-    title: "Finance Hub",
-    actions: [
-      { id: "invoice", label: "Create Invoice" },
-      { id: "payment", label: "Record Payment" },
-      { id: "vat", label: "Run VAT Check" }
-    ]
-  },
+    finance: {
+        title: "Finance Hub",
+        buttons: [
+            { id: "newinvoice", label: "New Invoice" },
+            { id: "invoices", label: "Invoices" },
+            { id: "books", label: "Books" },
+            { id: "audit", label: "Audit Trail" }
+        ]
+    },
 
-  cannabis: {
-    title: "Cannabis / Health Hub",
-    actions: [
-      { id: "prescription", label: "Issue Prescription" },
-      { id: "dispense", label: "Dispense Product" },
-      { id: "verify", label: "Verify Patient" }
-    ]
-  },
+    cannabis: {
+        title: "Cannabis / Health Hub",
+        buttons: [
+            { id: "prescription", label: "Issue Prescription" },
+            { id: "dispense", label: "Dispense Product" },
+            { id: "verify", label: "Verify Patient" }
+        ]
+    },
 
-  government: {
-    title: "Government Hub",
-    actions: [
-      { id: "case_open", label: "Open Case" },
-      { id: "case_update", label: "Update Case" },
-      { id: "case_close", label: "Close Case" }
-    ]
-  }
+    government: {
+        title: "Government Hub",
+        buttons: [
+            { id: "register", label: "Register Citizen" },
+            { id: "permit", label: "Issue Permit" },
+            { id: "complaint", label: "File Complaint" }
+        ]
+    }
 };
 
-/* ----------------------------------------------------------
-   SWITCH HUB VIEW
------------------------------------------------------------*/
+/* --------------------------
+   Load Hub into Screen
+---------------------------*/
+function loadHub(hubName) {
+    activeHub = hubName;
 
-function renderHub(hubKey) {
-  const hub = hubs[hubKey];
+    const hub = hubs[hubName];
+    hubContent.innerHTML = `
+        <h2>${hub.title}</h2>
+        <div class="btn-row">
+            ${hub.buttons
+                .map(
+                    (b) =>
+                        `<button class="action-btn" data-action="${b.id}">${b.label}</button>`
+                )
+                .join("")}
+        </div>
+    `;
 
-  hubContent.innerHTML = `
-    <h2>${hub.title}</h2>
-    ${hub.actions
-      .map(
-        (action) => `
-        <button class="action-btn" onclick="createReceipt('${hubKey}', '${action.id}')">
-          ${action.label}
-        </button>`
-      )
-      .join("")}
-  `;
+    document
+        .querySelectorAll(".hub-btn")
+        .forEach((btn) =>
+            btn.classList.toggle("active", btn.dataset.hub === hubName)
+        );
+
+    addReceipt(hubName, "opened-hub");
+
+    document.querySelectorAll(".action-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const action = btn.dataset.action;
+            addReceipt(hubName, action);
+        });
+    });
 }
 
-/* ----------------------------------------------------------
-   CREATE RECEIPT (SIMULATED)
------------------------------------------------------------*/
-
-function createReceipt(hub, action) {
-  const timestamp = new Date().toLocaleString();
-
-  const receiptText = `#${receiptCounter++} • ${hub.toUpperCase()} • ${action} • ${timestamp}`;
-
-  const li = document.createElement("li");
-  li.classList.add("receipt-item");
-  li.textContent = receiptText;
-
-  receiptList.prepend(li); // newest at top
-}
-
-/* ----------------------------------------------------------
-   EVENT LISTENERS — HUB TABS
------------------------------------------------------------*/
-
+/* --------------------------
+   Initial Load
+---------------------------*/
 hubButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    // update active state
-    hubButtons.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    activeHub = btn.dataset.hub;
-    renderHub(activeHub);
-  });
+    btn.addEventListener("click", () => loadHub(btn.dataset.hub));
 });
 
-/* ----------------------------------------------------------
-   INIT — LOAD DEFAULT HUB
------------------------------------------------------------*/
-
-renderHub(activeHub);
-
+loadHub("finance");

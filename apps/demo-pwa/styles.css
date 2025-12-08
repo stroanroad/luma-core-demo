@@ -1,137 +1,120 @@
-/* GLOBAL RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: system-ui, sans-serif;
-}
-
-/* BACKGROUND + GLOBAL COLORS */
+/* -------------------------
+   GLOBAL PAGE STYLING
+--------------------------*/
 body {
-  background: linear-gradient(140deg, #031227 0%, #00050d 100%);
-  color: #e8f3ff;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 2rem;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0033a0, #0066ff);
+    font-family: "Segoe UI", sans-serif;
+    color: white;
 }
 
-/* HEADER */
-.lc-header {
-  text-align: center;
-  padding: 1.7rem 1rem 1.2rem;
-  background: rgba(0, 15, 35, 0.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(6px);
+/* -------------------------
+   HEADER
+--------------------------*/
+header {
+    text-align: center;
+    padding: 30px 10px;
 }
 
-.lc-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.2rem;
-  letter-spacing: 0.5px;
-  color: #8fd6ff;
+h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
 }
 
-.lc-sub {
-  font-size: 0.9rem;
-  opacity: 0.75;
+p {
+    margin-top: 6px;
+    opacity: 0.85;
 }
 
-/* MAIN CONTAINER */
-.lc-main {
-  width: 100%;
-  max-width: 900px;
-  margin: auto;
-  padding: 1.4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-}
-
-/* NAVIGATION TABS */
-.hub-nav {
-  display: flex;
-  gap: 0.6rem;
+/* -------------------------
+   HUB NAV BUTTONS
+--------------------------*/
+nav {
+    margin-top: 20px;
 }
 
 .hub-btn {
-  flex: 1;
-  padding: 0.75rem;
-  border-radius: 100px;
-  border: 1px solid rgba(120, 200, 255, 0.4);
-  background: rgba(0, 20, 45, 0.85);
-  color: #e6f3ff;
-  cursor: pointer;
-  font-size: 0.9rem;
-  letter-spacing: 0.2px;
-  transition: 0.2s;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 30px;
+    margin: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.25s;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.25);
+}
+
+.hub-btn:hover {
+    background: #0b5ed7;
 }
 
 .hub-btn.active {
-  background: rgba(30, 110, 180, 0.9);
-  border-color: #68d1ff;
-  box-shadow: 0 0 12px #68d1ff60;
+    background: #41c7f4;
+    color: #001a33;
 }
 
-/* PANELS */
-.hub-panel,
-.receipt-panel {
-  background: rgba(0, 12, 30, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  padding: 1.2rem;
-  backdrop-filter: blur(4px);
+/* -------------------------
+   HUB CONTENT CONTAINERS
+--------------------------*/
+#hub-content,
+#audit-section {
+    background: rgba(0, 25, 80, 0.35);
+    padding: 20px;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0px 6px 25px rgba(0,0,0,0.45);
 }
 
-.hub-panel h2,
-.receipt-panel h2 {
-  font-size: 1.2rem;
-  margin-bottom: 0.6rem;
-  color: #aee4ff;
-}
-
-/* ACTION BUTTONS */
+/* -------------------------
+   ACTION BUTTONS INSIDE HUBS
+--------------------------*/
 .action-btn {
-  width: 100%;
-  margin: 0.4rem 0;
-  padding: 0.75rem;
-  border-radius: 12px;
-  border: none;
-  background: rgba(12, 70, 140, 0.95);
-  color: #e6f1ff;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: 0.25s;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    margin: 6px 6px 14px 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.25s;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.25);
 }
 
 .action-btn:hover {
-  background: rgba(25, 100, 160, 1);
+    background: #0b5ed7;
 }
 
-/* RECEIPTS LIST */
-.receipt-list {
-  list-style: none;
-  max-height: 230px;
-  overflow-y: auto;
-  margin-top: 0.7rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+/* -------------------------
+   RECEIPT LIST
+--------------------------*/
+#receipt-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
 }
 
-.receipt-item {
-  padding: 0.75rem;
-  border-radius: 10px;
-  background: rgba(20, 50, 90, 0.9);
-  border-left: 4px solid #5ad2ff;
-  letter-spacing: 0.2px;
-  font-size: 0.85rem;
+#receipt-list li {
+    background: rgba(255,255,255,0.12);
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.25);
 }
 
-/* FOOTER */
-.lc-footer {
-  text-align: center;
-  padding: 0.8rem;
-  opacity: 0.35;
+/* -------------------------
+   FOOTER
+--------------------------*/
+footer {
+    text-align: center;
+    margin: 35px 0;
+    opacity: 0.8;
 }

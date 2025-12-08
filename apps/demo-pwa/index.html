@@ -1,47 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Luma Core Demo – Hubs</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="UTF-8">
+    <title>Luma Core Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="manifest" href="manifest.webmanifest" />
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.webmanifest">
 
+    <!-- Service Worker -->
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("service-worker.js");
+        }
+    </script>
+
+    <!-- MAIN STYLESHEET -->
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+    <header>
+        <h1>Luma Core Demo</h1>
+        <p>Technical Prototype • Sovereign Digital Infrastructure • Audit-by-Default</p>
 
-  <header class="lc-header">
-    <h1 class="lc-title">Luma Core Demo</h1>
-    <p class="lc-sub">Sovereign Digital Infrastructure • Audit-by-Default</p>
-  </header>
+        <nav>
+            <button class="hub-btn" data-hub="finance">Finance</button>
+            <button class="hub-btn" data-hub="cannabis">Cannabis</button>
+            <button class="hub-btn" data-hub="government">Government</button>
+        </nav>
+    </header>
 
-  <main class="lc-main">
-    
-    <!-- NAVIGATION -->
-    <nav class="hub-nav">
-      <button class="hub-btn active" data-hub="finance">Finance</button>
-      <button class="hub-btn" data-hub="cannabis">Cannabis</button>
-      <button class="hub-btn" data-hub="government">Government</button>
-    </nav>
+    <main id="hub-content">
+        <!-- Filled dynamically by app.js -->
+    </main>
 
-    <!-- HUB CONTENT -->
-    <section id="hub-content" class="hub-panel">
-      <!-- JS fills content -->
+    <section id="audit-section">
+        <h2>Audit Receipts (Simulated)</h2>
+        <ul id="receipt-list"></ul>
     </section>
 
-    <!-- RECEIPTS -->
-    <section class="receipt-panel">
-      <h2>Audit Receipts (Simulated)</h2>
-      <ul id="receipt-list" class="receipt-list"></ul>
-    </section>
+    <footer>
+        <p>© 2025 Luma Core — Technical Prototype<br>
+        Demonstration Only — No Real Data Stored</p>
+    </footer>
 
-  </main>
-
-  <footer class="lc-footer">
-    <small>© 2025 Luma Core – Demo Only</small>
-  </footer>
-
-  <script src="app.js"></script>
+    <!-- MAIN SCRIPT -->
+    <script src="app.js"></script>
 </body>
 </html>
