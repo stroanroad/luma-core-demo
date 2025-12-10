@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en"><head><title>MedBud Community Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luma Connect</title>
+  <meta property="og:title" content="Luma Connect — Accountability, Anonymity, Security">
+  <meta property="og:description" content="A living core for transparent dashboards across Government, Community, and Finance.">
+  <meta property="og:image" content="og-image.png">
+  <link id="favicon" rel="icon" href="favicon-dark.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { --bg:#000; --text:#fff; --card:#111; --accent:#007BFF; --link:#0af; }
+    body.light { --bg:#fff; --text:#000; --card:#f4f4f4; }
+    body.skin-core{ --accent:#007BFF; --link:#0af; }
+    body.skin-government{ --accent:#2459a6; --link:#2459a6; }
+    body.skin-medbud{ --accent:#2e8b57; --link:#2e8b57; }
+    body.skin-finance{ --accent:#00d4ff; --link:#00d4ff; }
+    body{ background:var(--bg); color:var(--text); font-family:Arial, sans-serif; margin:0; transition:background .3s, color .3s; min-height:100vh; }
+    .center{text-align:center;}
+    .logo{ margin:60px auto 20px; width:120px; height:120px; border-radius:30px; background:var(--accent); position:relative; }
+    .heartbeat{ position:absolute; top:50%; left:10%; right:10%; height:2px; background:#fff; }
+    h1{ margin:10px 0 8px; }
+    p.sub{ opacity:.85; margin:0 0 24px; }
+    .btn{ display:inline-block; margin:10px; padding:12px 20px; border-radius:10px; background:var(--accent); color:#fff; text-decoration:none; }
+    .btn:hover{ filter:brightness(.9); }
+    .lc-controls{ position:fixed; top:16px; right:16px; display:flex; gap:8px; align-items:center; z-index:9999; }
+    .lc-toggle{ padding:8px 10px; border:none; border-radius:8px; background: var(--accent); color:#fff; cursor:pointer; }
+    .lc-skins{ display:flex; gap:6px; background: var(--card); padding:6px; border-radius:10px; }
+    .skin-btn{ width:32px; height:32px; border:none; background:transparent; color:var(--accent); cursor:pointer; border-radius:8px; }
+    .skin-btn:hover{ background:rgba(127,127,127,.15); }
+    .card{ background:var(--card); border-radius:14px; padding:18px; margin:16px auto; max-width:900px; }
+    a{ color:var(--link); }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; max-width:1200px; margin:0 auto; padding:0 16px; }
+    .info{ border-left:6px solid var(--accent); }
+    footer{ text-align:center; opacity:.8; padding:30px 10px; }
+    /* Magic modal */
+    .magic-btn{ position: fixed; bottom: 18px; right: 18px; width:44px; height:44px; border-radius:22px; border:none; background:var(--accent); color:#fff; font-weight:bold; cursor:pointer; z-index: 10000; }
+    .magic-modal{ display:none; position:fixed; inset:0; z-index:10001; }
+    .magic-modal.open{ display:block; }
+    .magic-backdrop{ position:absolute; inset:0; background: rgba(0,0,0,.6); }
+    .magic-content{ position:relative; max-width:720px; margin:10vh auto; background:var(--card); color:var(--text); padding:20px; border-radius:12px; }
+  </style>
+  <script>
+    function setTheme(isLight){ document.body.classList.toggle('light', isLight); localStorage.setItem('theme', isLight?'light':'dark'); updateFavicon(); }
+    function toggleTheme(){ setTheme(!document.body.classList.contains('light')); }
+    function setSkin(s){ document.body.classList.remove('skin-core','skin-government','skin-medbud','skin-finance'); document.body.classList.add('skin-'+s); localStorage.setItem('skin', s); }
+    function applySaved(){
+      const t=localStorage.getItem('theme')||'dark';
+      const s=localStorage.getItem('skin')||'core';
+      document.body.classList.toggle('light', t==='light');
+      document.body.classList.add('skin-'+s);
+      updateFavicon();
+    }
+    function applyParams(){
+      const u=new URLSearchParams(location.search);
+      const skin=u.get('skin'); const theme=u.get('theme');
+      const skins=['core','government','medbud','finance'];
+      if (skins.includes(skin)) setSkin(skin);
+      if (theme==='light' || theme==='dark') setTheme(theme==='light');
+    }
+    function updateFavicon(){
+      const href = document.body.classList.contains('light') ? 'favicon-light.png' : 'favicon-dark.png';
+      const link = document.getElementById('favicon'); if (link) link.href = href;
+    }
+    function openMagic(){ document.getElementById('magicModal').classList.add('open'); document.getElementById('magicModal').setAttribute('aria-hidden','false'); }
+    function closeMagic(){ document.getElementById('magicModal').classList.remove('open'); document.getElementById('magicModal').setAttribute('aria-hidden','true'); }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      applySaved(); applyParams();
+      document.querySelectorAll('.skin-btn').forEach(b=>b.addEventListener('click', ()=>setSkin(b.dataset.skin)));
+    });
+  </script>
+</head>
+<body class="skin-medbud">
+  
+<div class="lc-controls">
+  <button class="lc-toggle" onclick="toggleTheme()" title="Toggle Dark/Light">☾</button>
+  <div class="lc-skins" title="Switch Skin">
+    <button class="skin-btn" data-skin="core" aria-label="Core">🔵</button>
+    <button class="skin-btn" data-skin="government" aria-label="Government">🏛️</button>
+    <button class="skin-btn" data-skin="medbud" aria-label="MedBud">🌱</button>
+    <button class="skin-btn" data-skin="finance" aria-label="Finance">📊</button>
+  </div>
+</div>
+<!-- Core Magic explainer -->
+<button class="magic-btn" onclick="openMagic()" title="How the Core works">?</button>
+<div class="magic-modal" id="magicModal" aria-hidden="true">
+  <div class="magic-backdrop" onclick="closeMagic()"></div>
+  <div class="magic-content">
+    <h3>Core Magic: Anonymous but Accountable</h3>
+    <ul>
+      <li><b>Anonymous-by-default IDs</b> — rotating, unlinkable identifiers.</li>
+      <li><b>Signed proofs</b> — every action produces a cryptographic receipt.</li>
+      <li><b>Selective disclosure</b> — reveal only what’s required, nothing more.</li>
+      <li><b>Tamper-evident logs</b> — integrity checks show if anything’s altered.</li>
+      <li><b>Court-grade audit trail</b> — verifiable end-to-end accountability.</li>
+    </ul>
+    <button class="btn" onclick="closeMagic()">Close</button>
+  </div>
+</div>
+
+  <div class="center">
+    <h1>MedBud Community Dashboard</h1>
+    <div class="card info">
+      <h3>What this shows</h3>
+      <ul style="text-align:left; max-width:760px; margin:0 auto;">
+        <li><b>Market Growth</b> — demo trend for the sector.</li>
+        <li><b>Community Health Mix</b> — medical / wellness / recreational share.</li>
+        <li><b>Education</b> — responsive video embed (works on mobile).</li>
+        <li><b>Legal Updates</b> — space for regulatory notes.</li>
+      </ul>
+      <p style="opacity:.8"><i>Powered by the same Core — anonymous-by-default, accountable-by-design.</i></p>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card"><h2>Market Growth (Demo)</h2><canvas id="marketChart"></canvas></div>
+    <div class="card"><h2>Community Health Mix</h2><canvas id="healthChart"></canvas></div>
+    <div class="card"><h2>Education</h2>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Education" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+      </div>
+    </div>
+    <div class="card"><h2>Legal Updates</h2><p>Latest guidance, regulation changes, and safety notes can surface here.</p></div>
+  </div>
+  <div class="center" style="margin:20px;"><a href="index.html">⬅ Back to Home</a></div>
+  <script>
+    function themeColor(){ return getComputedStyle(document.body).color; }
+    new Chart(document.getElementById('marketChart'), {
+      type:'line', data:{ labels:['2019','2020','2021','2022','2023','2024','2025'],
+      datasets:[{ label:'Index', data:[20,28,35,45,60,72,88], borderColor:getComputedStyle(document.body).getPropertyValue('--accent'), fill:false }] },
+      options:{ plugins:{ legend:{ labels:{ color: themeColor() } } },
+                scales:{ x:{ ticks:{ color: themeColor() } }, y:{ ticks:{ color: themeColor() } } } }
+    });
+    new Chart(document.getElementById('healthChart'), {
+      type:'pie', data:{ labels:['Medical','Wellness','Recreational'], datasets:[{ data:[50,30,20], backgroundColor:['#2e8b57','#7ec8a5','#c8e6d4'] }] },
+      options:{ plugins:{ legend:{ labels:{ color: themeColor() } } } }
+    });
+  </script>
+  <footer>© Luma Connect — <a href="mailto:info@luma-connect.app">info@luma-connect.app</a></footer>
+</body></html>

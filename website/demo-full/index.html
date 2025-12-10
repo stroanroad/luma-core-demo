@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luma Connect</title>
+  <meta property="og:title" content="Luma Connect — Accountability, Anonymity, Security">
+  <meta property="og:description" content="A living core for transparent dashboards across Government, Community, and Finance.">
+  <meta property="og:image" content="og-image.png">
+  <link id="favicon" rel="icon" href="favicon-dark.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { --bg:#000; --text:#fff; --card:#111; --accent:#007BFF; --link:#0af; }
+    body.light { --bg:#fff; --text:#000; --card:#f4f4f4; }
+    body.skin-core{ --accent:#007BFF; --link:#0af; }
+    body.skin-government{ --accent:#2459a6; --link:#2459a6; }
+    body.skin-medbud{ --accent:#2e8b57; --link:#2e8b57; }
+    body.skin-finance{ --accent:#00d4ff; --link:#00d4ff; }
+    body{ background:var(--bg); color:var(--text); font-family:Arial, sans-serif; margin:0; transition:background .3s, color .3s; min-height:100vh; }
+    .center{text-align:center;}
+    .logo{ margin:60px auto 20px; width:120px; height:120px; border-radius:30px; background:var(--accent); position:relative; }
+    .heartbeat{ position:absolute; top:50%; left:10%; right:10%; height:2px; background:#fff; }
+    h1{ margin:10px 0 8px; }
+    p.sub{ opacity:.85; margin:0 0 24px; }
+    .btn{ display:inline-block; margin:10px; padding:12px 20px; border-radius:10px; background:var(--accent); color:#fff; text-decoration:none; }
+    .btn:hover{ filter:brightness(.9); }
+    .lc-controls{ position:fixed; top:16px; right:16px; display:flex; gap:8px; align-items:center; z-index:9999; }
+    .lc-toggle{ padding:8px 10px; border:none; border-radius:8px; background: var(--accent); color:#fff; cursor:pointer; }
+    .lc-skins{ display:flex; gap:6px; background: var(--card); padding:6px; border-radius:10px; }
+    .skin-btn{ width:32px; height:32px; border:none; background:transparent; color:var(--accent); cursor:pointer; border-radius:8px; }
+    .skin-btn:hover{ background:rgba(127,127,127,.15); }
+    .card{ background:var(--card); border-radius:14px; padding:18px; margin:16px auto; max-width:900px; }
+    a{ color:var(--link); }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; max-width:1200px; margin:0 auto; padding:0 16px; }
+    .info{ border-left:6px solid var(--accent); }
+    footer{ text-align:center; opacity:.8; padding:30px 10px; }
+    /* Magic modal */
+    .magic-btn{ position: fixed; bottom: 18px; right: 18px; width:44px; height:44px; border-radius:22px; border:none; background:var(--accent); color:#fff; font-weight:bold; cursor:pointer; z-index: 10000; }
+    .magic-modal{ display:none; position:fixed; inset:0; z-index:10001; }
+    .magic-modal.open{ display:block; }
+    .magic-backdrop{ position:absolute; inset:0; background: rgba(0,0,0,.6); }
+    .magic-content{ position:relative; max-width:720px; margin:10vh auto; background:var(--card); color:var(--text); padding:20px; border-radius:12px; }
+  </style>
+  <script>
+    function setTheme(isLight){ document.body.classList.toggle('light', isLight); localStorage.setItem('theme', isLight?'light':'dark'); updateFavicon(); }
+    function toggleTheme(){ setTheme(!document.body.classList.contains('light')); }
+    function setSkin(s){ document.body.classList.remove('skin-core','skin-government','skin-medbud','skin-finance'); document.body.classList.add('skin-'+s); localStorage.setItem('skin', s); }
+    function applySaved(){
+      const t=localStorage.getItem('theme')||'dark';
+      const s=localStorage.getItem('skin')||'core';
+      document.body.classList.toggle('light', t==='light');
+      document.body.classList.add('skin-'+s);
+      updateFavicon();
+    }
+    function applyParams(){
+      const u=new URLSearchParams(location.search);
+      const skin=u.get('skin'); const theme=u.get('theme');
+      const skins=['core','government','medbud','finance'];
+      if (skins.includes(skin)) setSkin(skin);
+      if (theme==='light' || theme==='dark') setTheme(theme==='light');
+    }
+    function updateFavicon(){
+      const href = document.body.classList.contains('light') ? 'favicon-light.png' : 'favicon-dark.png';
+      const link = document.getElementById('favicon'); if (link) link.href = href;
+    }
+    function openMagic(){ document.getElementById('magicModal').classList.add('open'); document.getElementById('magicModal').setAttribute('aria-hidden','false'); }
+    function closeMagic(){ document.getElementById('magicModal').classList.remove('open'); document.getElementById('magicModal').setAttribute('aria-hidden','true'); }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      applySaved(); applyParams();
+      document.querySelectorAll('.skin-btn').forEach(b=>b.addEventListener('click', ()=>setSkin(b.dataset.skin)));
+    });
+  </script>
+</head>
+<body class="skin-core">
+  
+<div class="lc-controls">
+  <button class="lc-toggle" onclick="toggleTheme()" title="Toggle Dark/Light">☾</button>
+  <div class="lc-skins" title="Switch Skin">
+    <button class="skin-btn" data-skin="core" aria-label="Core">🔵</button>
+    <button class="skin-btn" data-skin="government" aria-label="Government">🏛️</button>
+    <button class="skin-btn" data-skin="medbud" aria-label="MedBud">🌱</button>
+    <button class="skin-btn" data-skin="finance" aria-label="Finance">📊</button>
+  </div>
+</div>
+<!-- Core Magic explainer -->
+<button class="magic-btn" onclick="openMagic()" title="How the Core works">?</button>
+<div class="magic-modal" id="magicModal" aria-hidden="true">
+  <div class="magic-backdrop" onclick="closeMagic()"></div>
+  <div class="magic-content">
+    <h3>Core Magic: Anonymous but Accountable</h3>
+    <ul>
+      <li><b>Anonymous-by-default IDs</b> — rotating, unlinkable identifiers.</li>
+      <li><b>Signed proofs</b> — every action produces a cryptographic receipt.</li>
+      <li><b>Selective disclosure</b> — reveal only what’s required, nothing more.</li>
+      <li><b>Tamper-evident logs</b> — integrity checks show if anything’s altered.</li>
+      <li><b>Court-grade audit trail</b> — verifiable end-to-end accountability.</li>
+    </ul>
+    <button class="btn" onclick="closeMagic()">Close</button>
+  </div>
+</div>
+
+  <div class="center">
+    <div class="logo"><div class="heartbeat"></div></div>
+    <h1>Luma Connect</h1>
+    <p class="sub">Security is just the beginning.</p>
+    <a class="btn" href="gov-dashboard.html">Government Demo</a>
+    <div class="sub">Accountability across UK & devolved governments</div>
+    <a class="btn" href="medbud-dashboard.html">MedBud Demo</a>
+    <div class="sub">Community health, education, and market transparency</div>
+    <a class="btn" href="test-xrp-ultraslim.html">XRP / Finance</a>
+    <div class="sub">Finance & investor dashboards</div>
+    <a class="btn" href="plain.html">Plain</a>
+    <div class="sub">Fallback page</div>
+  </div>
+  <footer>© Luma Connect — <a href="mailto:info@luma-connect.app">info@luma-connect.app</a></footer>
+</body></html>

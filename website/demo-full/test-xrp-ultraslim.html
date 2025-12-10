@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XRP / Finance Demo</title>
+  <style>
+    :root{ --bg:#000; --text:#fff; --card:#111; --accent:#00d4ff; --link:#00d4ff; }
+    body.light{ --bg:#fff; --text:#000; --card:#f4f4f4; }
+    body{ background:var(--bg); color:var(--text); font-family:Arial, sans-serif; margin:0; transition:background .3s, color .3s; min-height:100vh; }
+    .lc-controls{ position: fixed; top: 16px; right: 16px; display:flex; gap:8px; align-items:center; z-index: 9999; }
+    .lc-toggle{ padding:8px 10px; border:none; border-radius:8px; background: var(--accent); color:#fff; cursor:pointer; }
+    .lc-skins{ display:flex; gap:6px; background: var(--card); padding:6px; border-radius:10px; }
+    .skin-btn{ width:32px; height:32px; border:none; background:transparent; color: var(--accent); cursor:pointer; border-radius:8px; }
+    .skin-btn:hover{ background: rgba(127,127,127,.15); }
+    .center{text-align:center; padding: 60px 20px;}
+    .card{ background: var(--card); border-radius:14px; padding:18px; margin: 16px auto; max-width: 900px; }
+    a{ color: var(--link); }
+  </style>
+  <script>
+    function setTheme(isLight){ document.body.classList.toggle('light', isLight); localStorage.setItem('theme', isLight?'light':'dark'); }
+    function toggleTheme(){ setTheme(!document.body.classList.contains('light')); }
+    function setSkin(s){ localStorage.setItem('skin', s); location.href='index.html'; }
+    function updateFavicon(){ const link=document.getElementById('favicon'); if(link){ link.href = document.body.classList.contains('light') ? 'favicon-light.png' : 'favicon-dark.png'; } }
+  </script>
+</head>
+<body>
+  <div class="lc-controls">
+    <button class="lc-toggle" onclick="toggleTheme();updateFavicon()" title="Toggle Dark/Light">☾</button>
+    <div class="lc-skins" title="Switch Skin">
+      <button class="skin-btn" onclick="setSkin('core')" aria-label="Core">🔵</button>
+      <button class="skin-btn" onclick="setSkin('government')" aria-label="Government">🏛️</button>
+      <button class="skin-btn" onclick="setSkin('medbud')" aria-label="MedBud">🌱</button>
+      <button class="skin-btn" onclick="setSkin('finance')" aria-label="Finance">📊</button>
+    </div>
+  </div>
+  <div class="center">
+    <h1>XRP / Finance Demo</h1>
+    <div class="card">
+      <p>This page is a placeholder for finance/investor modules. Charts, wallets, and investor KPIs can live here.</p>
+    </div>
+    <a href="index.html">⬅ Back to Home</a>
+  </div>
+</body></html>
