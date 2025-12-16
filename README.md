@@ -15,7 +15,7 @@ offline receipts, hub navigation, sync behaviour, and minimal PWA architecture.
 
 ## Live Demo
 
-🔗 https://https://luma-core-demo.netlify.app
+🔗 https://luma-core-demo.netlify.app
 
 
 
